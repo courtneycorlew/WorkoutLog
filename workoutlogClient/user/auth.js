@@ -4,10 +4,9 @@ $(function() {
         signup: function() {
             //username & password variables.
             var username = $("#su_username").val();
-            var password = $("su_password").val();
+            var password = $("#su_password").val();
             //user object
-            var user = {
-                user: {
+            var user = { user: {
                     username: username,
                     password: password
                 }
@@ -24,15 +23,20 @@ $(function() {
             signup.done(function(data) {
                 if(data.sessionToken) {
                     WorkoutLog.setAuthHeader(data.sessionToken);
+                    console.log("Thanks for being my friend!")
+                    console.log(data.sessionToken);
                 }
+
                 $("#signup-modal").modal("hide");
                 $(".disabled").removeClass("disabled");
                 $("#loginout").text("Logout");
+                console.log("Great job signing up!");
+
             }).fail(function() {
                 $("#su_error").text("There was an issue with sign up").show();
             });
         }
     });
     //bind events
-    $('#signup').on("click", WorkoutLog.signup);
+    $("#signup").on("click", WorkoutLog.signup);
 });
