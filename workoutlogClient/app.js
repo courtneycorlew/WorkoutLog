@@ -55,6 +55,21 @@ $(function() {
         }
     });
 
+    // bind tab change events
+    // bootstrap tab --> binding to a bootstrap event
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href"); // activated tab
+        if (target === "#log") {
+        WorkoutLog.log.setDefinitions();
+        }
+
+        if (target === "#history") {
+        WorkoutLog.log.setHistory();
+        }
+    });
+
+
+
     var token = window.localStorage.getItem("sessionToken");
     if (token) {
         WorkoutLog.setAuthHeader(token);
